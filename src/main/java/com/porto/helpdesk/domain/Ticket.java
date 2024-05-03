@@ -2,12 +2,16 @@ package com.porto.helpdesk.domain;
 
 import com.porto.helpdesk.domain.enums.Priority;
 import com.porto.helpdesk.domain.enums.Status;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Entity(name = "tb_ticket")
 public class Ticket {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private LocalDateTime openAt = LocalDateTime.now();
 
@@ -18,7 +22,12 @@ public class Ticket {
     private String title;
     private String description;
 
+    @ManyToOne
+    @JoinColumn(name = "technician_id")
     private Technician technician;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
     private Client client;
 
     public Ticket() {

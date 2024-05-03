@@ -1,19 +1,31 @@
 package com.porto.helpdesk.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.porto.helpdesk.domain.enums.Profile;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public abstract class Person {
-    protected Integer id;
+@Entity(name = "tb_person")
+public abstract class Person implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.UUID)
+    protected String id;
     protected String name;
+
+    @Column(unique = true)
     protected String cpf;
+    @Column(unique = true)
     protected String email;
     protected String password;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "PROFILES")
     protected Set<Integer> profiles = new HashSet<>();
     protected LocalDateTime createdAt = LocalDateTime.now();
 
@@ -21,7 +33,7 @@ public abstract class Person {
         addProfiles(Profile.CLIENT);
     }
 
-    public Person(Integer id, String name, String cpf, String email, String password) {
+    public Person(String id, String name, String cpf, String email, String password) {
         this.id = id;
         this.name = name;
         this.cpf = cpf;
@@ -29,11 +41,11 @@ public abstract class Person {
         this.password = password;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
