@@ -17,7 +17,7 @@ public class Client extends Person{
         addProfiles(Profile.CLIENT);
     }
 
-    public Client(String id, String name, String cpf, String email, String password, List<Ticket> tickets) {
+    public Client(String id, String name, String cpf, String email, String password) {
         super(id, name, cpf, email, password);
         this.tickets = tickets;
         addProfiles(Profile.CLIENT);
