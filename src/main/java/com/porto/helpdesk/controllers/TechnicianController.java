@@ -21,8 +21,8 @@ public class TechnicianController {
     private TechnicianService service;
 
     @GetMapping
-    public ResponseEntity<List<Technician>> findAll(){
-        List<Technician> results = service.findAll();
+    public ResponseEntity<List<TechnicianDTO>> findAll(){
+        List<TechnicianDTO> results = service.findAll();
         return ResponseEntity.ok().body(results);
     }
 
