@@ -1,6 +1,7 @@
 package com.porto.helpdesk.controllers;
 
 import com.porto.helpdesk.domain.Technician;
+import com.porto.helpdesk.dtos.TechnicianDTO;
 import com.porto.helpdesk.services.TechnicianService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Controller
 @RequestMapping("/techs")
 public class TechnicianController {
@@ -16,10 +20,16 @@ public class TechnicianController {
     @Autowired
     private TechnicianService service;
 
+    @GetMapping
+    public ResponseEntity<List<Technician>> findAll(){
+        List<Technician> results = service.findAll();
+        return ResponseEntity.ok().body(results);
+    }
+
     @GetMapping(value = "/{id}")
-    public ResponseEntity<Technician> findById(@PathVariable String id){
+    public ResponseEntity<TechnicianDTO> findById(@PathVariable String id){
         Technician techFound = service.findById(id);
-        return  ResponseEntity.ok().body(techFound);
+        return  ResponseEntity.ok().body(new TechnicianDTO(techFound));
 
     }
 }
