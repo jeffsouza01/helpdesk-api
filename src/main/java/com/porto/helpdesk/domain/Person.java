@@ -3,6 +3,7 @@ package com.porto.helpdesk.domain;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.porto.helpdesk.domain.enums.Profile;
 import jakarta.persistence.*;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -18,6 +19,7 @@ public abstract class Person implements Serializable {
     protected String id;
     protected String name;
 
+    @CPF
     @Column(unique = true)
     protected String cpf;
     @Column(unique = true)

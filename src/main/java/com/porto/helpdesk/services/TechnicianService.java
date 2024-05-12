@@ -44,6 +44,16 @@ public class TechnicianService {
         return technicianRepository.save(newTech);
     }
 
+    public Technician update(String id, TechnicianDTO techDTO) {
+        techDTO.setId(id);
+
+        Technician oldObj = findById(id);
+        validateCPFAndEmail(techDTO);
+
+        oldObj = new Technician(techDTO);
+        return technicianRepository.save(oldObj);
+    }
+
     private void validateCPFAndEmail(TechnicianDTO techDTO) {
 
         Optional<Person> newTech = personRepository.findByCpf(techDTO.getCpf());
@@ -56,4 +66,6 @@ public class TechnicianService {
             throw new DataIntegrityException("Email already exists!");
         }
     }
+
+
 }
