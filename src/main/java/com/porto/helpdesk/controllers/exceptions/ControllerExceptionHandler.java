@@ -28,7 +28,7 @@ public class ControllerExceptionHandler {
                                                                          HttpServletRequest request) {
 
         StandardError error = new StandardError(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(),
-                "Violação de dados", err.getMessage(), request.getRequestURI());
+                "validation data error", err.getMessage(), request.getRequestURI());
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
