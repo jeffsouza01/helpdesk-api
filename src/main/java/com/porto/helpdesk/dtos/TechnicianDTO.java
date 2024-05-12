@@ -2,6 +2,7 @@ package com.porto.helpdesk.dtos;
 
 import com.porto.helpdesk.domain.Technician;
 import com.porto.helpdesk.domain.enums.Profile;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -10,9 +11,15 @@ import java.util.stream.Collectors;
 
 public class TechnicianDTO {
     protected String id;
+    @NotNull(message = "Field NAME is required")
     protected String name;
+
+    @NotNull(message = "Field CPF is required")
     protected String cpf;
+    @NotNull(message = "Field EMAIL is required")
     protected String email;
+
+    @NotNull(message = "Field PASSWORD is required")
     protected String password;
 
     protected Set<Integer> profiles = new HashSet<>();
