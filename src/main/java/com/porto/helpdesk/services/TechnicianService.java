@@ -54,6 +54,16 @@ public class TechnicianService {
         return technicianRepository.save(oldObj);
     }
 
+    public void delete(String id) {
+        Technician tech = findById(id);
+
+        if (tech.getTickets().size() > 0) {
+            throw new DataIntegrityException("Technician have tickets on demand and not possible be deleted");
+        }
+
+        technicianRepository.deleteById(id);
+    }
+
     private void validateCPFAndEmail(TechnicianDTO techDTO) {
 
         Optional<Person> newTech = personRepository.findByCpf(techDTO.getCpf());
