@@ -19,7 +19,9 @@ public class TechnicianDTO {
 
     protected LocalDateTime createdAt = LocalDateTime.now();
 
-    public TechnicianDTO(){}
+    public TechnicianDTO(){
+        addProfiles(Profile.CLIENT);
+    }
 
     public TechnicianDTO(Technician tech) {
         this.id = tech.getId();
@@ -29,6 +31,7 @@ public class TechnicianDTO {
         this.password = tech.getPassword();
         this.createdAt = tech.getCreatedAt();
         this.profiles = tech.getProfiles().stream().map(profile -> profile.getCod()).collect(Collectors.toSet());
+        addProfiles(Profile.CLIENT);
     }
 
 
