@@ -4,7 +4,7 @@ import com.porto.helpdesk.domain.Ticket;
 
 import java.time.LocalDateTime;
 
-public class TickteDTO {
+public class TicketDTO {
 
     private Integer id;
     private LocalDateTime openAt = LocalDateTime.now();
@@ -18,10 +18,10 @@ public class TickteDTO {
     private String technicianName;
     private String clientName;
 
-    public TickteDTO() {
+    public TicketDTO() {
     }
 
-    public TickteDTO(Ticket ticketObj) {
+    public TicketDTO(Ticket ticketObj) {
         this.id = ticketObj.getId();
         this.openAt = ticketObj.getOpenAt();
         this.closedAt = ticketObj.getClosedAt();
