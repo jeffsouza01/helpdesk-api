@@ -32,7 +32,7 @@ public class DBService {
 
         Client cli1 = new Client(null, "Linus Torvalds", "02905363088", "torvals@mail.com", "123");
 
-        Ticket tick1 = new Ticket(null, Priority.MEDIUM, Status.OPEN, "Ticket One", "First Ticket", tech1, cli1);
+        Ticket tick1 = new Ticket(null, Priority.MEDIUM, "Ticket One", "First Ticket", tech1, cli1);
 
 
         clientRepository.saveAll(Arrays.asList(cli1));

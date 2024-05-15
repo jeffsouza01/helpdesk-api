@@ -3,6 +3,7 @@ package com.porto.helpdesk.domain;
 import com.porto.helpdesk.domain.enums.Priority;
 import com.porto.helpdesk.domain.enums.Status;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -17,9 +18,13 @@ public class Ticket {
 
     private LocalDateTime closedAt;
 
+    @NotNull(message = "PRIORITY field is required")
     private Priority priority;
-    private Status status;
+
+    private Status status = Status.OPEN;
+    @NotNull(message = "Title field is required")
     private String title;
+    @NotNull(message = "Description field is required")
     private String description;
 
     @ManyToOne
@@ -33,10 +38,10 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(Integer id, Priority priority, Status status, String title, String description, Technician technician, Client client) {
+    public Ticket(Integer id, Priority priority, String title, String description, Technician technician, Client client) {
         this.id = id;
         this.priority = priority;
-        this.status = status;
+        this.status = Status.OPEN;
         this.title = title;
         this.description = description;
         this.technician = technician;
