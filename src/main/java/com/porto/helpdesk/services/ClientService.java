@@ -8,6 +8,7 @@ import com.porto.helpdesk.repositories.PersonRepository;
 import com.porto.helpdesk.services.exceptions.DataIntegrityException;
 import com.porto.helpdesk.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,9 @@ public class ClientService {
 
     @Autowired
     private PersonRepository personRepository;
+    @Autowired
+    private BCryptPasswordEncoder encoder;
+
 
     public List<ClientDTO> findAll(){
         List<Client> clients =  clientRepository.findAll();
@@ -37,7 +41,7 @@ public class ClientService {
 
     public Client create(ClientDTO clientDTO) {
         clientDTO.setId(null);
-
+        clientDTO.setPassword(encoder.encode(clientDTO.getPassword()));
         validateCPFAndEmail(clientDTO);
 
         Client newTech = new Client(clientDTO);
